@@ -10,7 +10,6 @@ import com.hsy.java.java.base.utils.RandomHelper;
 import com.hsy.java.util.secure.AESHelper;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
@@ -60,10 +59,9 @@ public class UserServiceImpl implements IUserService{
             user = crmUserRepository.withUsernameAndPasswordQuery(
                     loginParam.getUserName(),
                     AESHelper.encode(loginParam.getPassword()),
-                    (byte) 0) ;
+                    (byte)0) ;
         }else{
             // 手机号短信验证码登陆
-            //user = crmUserRepository.withMobileQuery(loginParam.getMobile(),(byte) 0);
         }
         if (null != user) return true ;
         return false ;

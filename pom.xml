@@ -30,6 +30,7 @@
         <version.swagger>2.7.0</version.swagger>
         <version.jackson.databind>2.8.10</version.jackson.databind>
         <version.c3p0.mchange>0.9.5.2</version.c3p0.mchange>
+        <version.docker.image.prefix>crm</version.docker.image.prefix>
     </properties>
 
     <dependencyManagement>
@@ -123,12 +124,12 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <!--<plugin>
+            <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.4.3</version>
+                <version>0.4.11</version>
                 <configuration>
-                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+                    <imageName>${version.docker.image.prefix}/${project.artifactId}</imageName>
                     <dockerDirectory>src/main/docker</dockerDirectory>
                     <resources>
                         <resource>
@@ -138,7 +139,7 @@
                         </resource>
                     </resources>
                 </configuration>
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
 </project>

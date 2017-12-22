@@ -1,11 +1,11 @@
-FROM java:8
+# 指定一个基础镜像centos
+FROM docker.io/centos:latest
 
-MAINTAINER crm
-
-ADD @project.build.finalName@.jar @project.build.finalName@.jar
-
-RUN sh -c 'touch /@project.build.finalName@.jar'
-
-ENV JAVA_OPTS=""
-
-CMD exec java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=docker -jar /@project.build.finalName@.jar
+#安装应用执行的环境java
+#RUN yum -y install java
+ 
+#将指定的jar文件复制到容器中
+COPY crm-server-1.0-SNAPSHOT.jar /usr/local/
+  
+#执行jar文件
+ENTRYPOINT ["java" ,"-jar","/usr/local/crm-server-1.0-SNAPSHOT.jar"]

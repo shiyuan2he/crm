@@ -45,7 +45,7 @@ public class UserController extends BaseController{
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userName",value = "用户名称",dataType = "String"),
             @ApiImplicitParam(name = "password",value = "登陆密码",dataType = "String"),
-            @ApiImplicitParam(name = "sex",value = "性别,1:男 2:女",dataType = "Byte"),
+            @ApiImplicitParam(name = "sex",value = "性别,1:男 2:女",dataType = "Integer"),
             @ApiImplicitParam(name = "mobile",value = "手机号",required = true,dataType = "Long"),
             @ApiImplicitParam(name = "email",value = "邮箱",dataType = "String"),
             @ApiImplicitParam(name = "source",value = "用户来源",dataType = "String"),

@@ -18,11 +18,8 @@ import org.springframework.stereotype.Repository;
 @Repository(value = "crmUserRepository")
 public interface TCrmUserRepository extends JpaRepository<TCrmUser,Long>{
 
-    @Query("select user from TCrmUser user where user.mobile =: mobile and user.isDel =: isDel")
-    TCrmUser withMobileQuery(@Param("mobile") Long mobile,@Param("isDel") Byte isDel);
-
-    @Query("select user from TCrmUser user where user.username =: username and user.password =: password and user.isDel =: isDel")
-    TCrmUser withUsernameAndPasswordQuery(@Param("username") String username,
-                             @Param("password") String password,
-                             @Param("isDel") Byte isDel);
+    @Query("select u from TCrmUser u where u.userName=:userName and u.password=:password and u.isDel=:isDel")
+    TCrmUser withUsernameAndPasswordQuery(@Param(value = "userName") String userName,
+                             @Param(value = "password") String password,
+                             @Param(value = "isDel") Byte isDel);
 }

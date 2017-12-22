@@ -1,12 +1,10 @@
 package com.hsy.crm.server.bean.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-@Entity(name = "t_crm_user")
+@Entity
+@Table(name = "t_crm_user")
 public class TCrmUser implements Serializable{
 	@Id
 	@GeneratedValue
