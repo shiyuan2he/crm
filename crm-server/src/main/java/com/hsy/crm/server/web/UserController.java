@@ -70,6 +70,7 @@ public class UserController extends BaseController{
             @ApiImplicitParam(name = "password",value = "登陆密码",dataType = "String"),
             @ApiImplicitParam(name = "mobile",value = "手机号",dataType = "Long"),
     })
+    @GetMapping(value = "/v1/login")
     public ResponseBodyBean<Boolean> login(@Valid UserLoginRequestParam loginParam, BindingResult result){
         if(result.hasErrors()){
             return failure(ValidateUtil.validateRequestParam(result)) ;
