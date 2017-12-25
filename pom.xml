@@ -19,6 +19,7 @@
     </modules>
 
     <properties>
+        <version.springcloud>Edgware.RELEASE</version.springcloud>
         <version.build.java>1.8</version.build.java>
         <version.build.encoding>UTF-8</version.build.encoding>
         <version.springboot.log4j>1.3.8.RELEASE</version.springboot.log4j>
@@ -35,6 +36,13 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${version.springcloud}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>com.hsy.java</groupId>
                 <artifactId>java-enum</artifactId>

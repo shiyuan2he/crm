@@ -1,9 +1,5 @@
 .idea
-*.iml
+crm.iml
 */*.iml
 target
-*/target/
-*/*/target
-
-*.class
-
+*/target

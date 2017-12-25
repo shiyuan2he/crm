@@ -1,13 +1,18 @@
 server:
   port: 9001
-
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://192.168.175.128:3306/crm?useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mariadb://192.168.216.129:3306/crm?useUnicode=true&characterEncoding=UTF-8
     username: root
     password: root@mariadb
   jpa:
     hibernate:
       ddl-auto: update
       show-sql: true
+  application:
+    name: crm-server
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer1:8080/eureka/
