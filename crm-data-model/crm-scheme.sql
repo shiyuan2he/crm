@@ -1,4 +1,5 @@
 create DATABASE crm DEFAULT CHARACTER SET utf8;
+use crm;
 
 DROP TABLE IF EXISTS `t_crm_user`;
 CREATE TABLE `t_crm_user` (

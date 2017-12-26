@@ -1,6 +1,5 @@
 server:
-  port: 9001
-
+  port: 10002
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
@@ -11,3 +10,9 @@ spring:
     hibernate:
       ddl-auto: update
       show-sql: true
+  application:
+    name: crm-server
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer1:8760/eureka/,http://peer2:8761/eureka/,http://peer3:8762/eureka/
