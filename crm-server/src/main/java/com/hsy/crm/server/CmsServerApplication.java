@@ -14,6 +14,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  * @price ¥5    微信：hewei1109
  */
 @SpringBootApplication
+
 public class CmsServerApplication {
     public static void main(String[] args) {
         new SpringApplicationBuilder(CmsServerApplication.class)

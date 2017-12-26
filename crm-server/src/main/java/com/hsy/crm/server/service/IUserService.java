@@ -1,7 +1,7 @@
 package com.hsy.crm.server.service;
 
-import com.hsy.crm.server.bean.request.UserLoginRequestParam;
 import com.hsy.crm.server.bean.request.UserRegRequestParam;
+import com.hsy.java.bean.vo.UserInfoBean;
 
 /**
  * @author heshiyuan
@@ -22,11 +22,14 @@ public interface IUserService {
      */
     boolean reg(UserRegRequestParam user) ;
     /**
-     * @description <p>用户登陆</p>
-     * @param loginParam 登陆参数
-     * @return 
+     * @description <p>用户信息查询</p>
+     * @param mobile 用户手机号
+     * @param id 用户id
+     * @param username 用户名称
+     * @param password 用户登录密码
+     * @return 用户信息dto
      * @author heshiyuan
      * @date 2017/12/22 15:30
      */
-    boolean login(UserLoginRequestParam loginParam) ;
+    UserInfoBean query(Long id,Long mobile,String username,String password) ;
 }

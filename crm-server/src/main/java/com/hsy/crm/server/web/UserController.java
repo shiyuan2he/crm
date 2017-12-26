@@ -1,11 +1,10 @@
 package com.hsy.crm.server.web;
 
-import com.hsy.crm.server.bean.entity.TCrmUser;
-import com.hsy.crm.server.bean.request.UserLoginRequestParam;
+import com.hsy.crm.server.bean.request.UserQueryRequestParam;
 import com.hsy.crm.server.bean.request.UserRegRequestParam;
 import com.hsy.crm.server.service.IUserService;
-import com.hsy.crm.server.utils.ValidateUtil;
 import com.hsy.java.bean.dto.ResponseBodyBean;
+import com.hsy.java.bean.vo.UserInfoBean;
 import com.hsy.java.bean.web.BaseController;
 import com.hsy.java.util.validation.ParamValidation;
 import io.swagger.annotations.Api;
@@ -14,14 +13,9 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
-import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 /**
  * @author heshiyuan
@@ -55,7 +49,7 @@ public class UserController extends BaseController{
     @ResponseBody
     public ResponseBodyBean<Boolean> reg(@Valid UserRegRequestParam regParam, BindingResult result){
         if(result.hasErrors()){
-            return failure(ValidateUtil.validateRequestParam(result)) ;
+            return failure(ParamValidation.validateRequestParam(result)) ;
         }
 
         if(userService.reg(regParam)){
@@ -64,19 +58,22 @@ public class UserController extends BaseController{
         return failure() ;
     }
 
-    @ApiOperation(value = "用户登陆",notes = "提供用户登陆服务")
+    @ApiOperation(value = "用户信息查询",notes = "提供用户信息查询服务：可以根据手机号或者用户名密码查询，提供三种查询方式：id;mobile;username,password")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userName",value = "用户名称",dataType = "String"),
-            @ApiImplicitParam(name = "password",value = "登陆密码",dataType = "String"),
+            @ApiImplicitParam(name = "id",value = "用户id",dataType = "Long",paramType = "path"),
             @ApiImplicitParam(name = "mobile",value = "手机号",dataType = "Long"),
+            @ApiImplicitParam(name = "userName",value = "用户名称",dataType = "String"),
+            @ApiImplicitParam(name = "password",value = "登陆密码",dataType = "String")
     })
-    @GetMapping(value = "/v1/login")
-    public ResponseBodyBean<Boolean> login(@Valid UserLoginRequestParam loginParam, BindingResult result){
+    @GetMapping(value = {"/v1/query","/v1/{id}/query"})
+    public ResponseBodyBean<UserInfoBean> query(@Valid UserQueryRequestParam queryParam, BindingResult result){
         if(result.hasErrors()){
-            return failure(ValidateUtil.validateRequestParam(result)) ;
+            return failure(ParamValidation.validateRequestParam(result)) ;
         }
-        if(userService.login(loginParam)){
-            return success(true) ;
+        UserInfoBean userInfoBean = userService.query(queryParam.getId(),queryParam.getMobile(),
+                queryParam.getUserName(),queryParam.getPassword()) ;
+        if(null != userInfoBean){
+            return success(userInfoBean) ;
         }
         return failure() ;
     }

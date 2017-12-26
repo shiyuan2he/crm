@@ -1,10 +1,11 @@
 package com.hsy.crm.server.service.impl;
 
 import com.hsy.crm.server.bean.entity.TCrmUser;
-import com.hsy.crm.server.bean.request.UserLoginRequestParam;
+import com.hsy.crm.server.bean.request.UserQueryRequestParam;
 import com.hsy.crm.server.bean.request.UserRegRequestParam;
 import com.hsy.crm.server.dao.TCrmUserRepository;
 import com.hsy.crm.server.service.IUserService;
+import com.hsy.java.bean.vo.UserInfoBean;
 import com.hsy.java.enums.ConstantEnum;
 import com.hsy.java.java.base.utils.RandomHelper;
 import com.hsy.java.util.secure.AESHelper;
@@ -52,18 +53,33 @@ public class UserServiceImpl implements IUserService{
         return false ;
     }
     @Override
-    public boolean login(UserLoginRequestParam loginParam){
+    public UserInfoBean query(Long id,Long mobile, String username, String password){
+        UserInfoBean userInfoBean = new UserInfoBean();
+        /**
+         * 第一顺位：id查询
+         * 第二顺位：mobile查询
+         * 第三顺位：username，password查询
+         */
         TCrmUser user = null ;
-        if(StringUtils.isNotBlank(loginParam.getUserName())&&StringUtils.isNotBlank(loginParam.getPassword())){
+        if(null != id){
+            //
+        }else if(null != mobile){
+
+        }else if(StringUtils.isNotBlank(username)&&StringUtils.isNotBlank(password)){
             // 用户名密码登陆
             user = crmUserRepository.withUsernameAndPasswordQuery(
-                    loginParam.getUserName(),
-                    AESHelper.encode(loginParam.getPassword()),
+                    password,
+                    AESHelper.encode(password),
                     (byte)0) ;
         }else{
             // 手机号短信验证码登陆
         }
-        if (null != user) return true ;
-        return false ;
+        if (null != user) {
+            userInfoBean.setUserId(user.getId());
+            userInfoBean.setMobile(user.getMobile());
+            userInfoBean.setUserCode(user.getUserCode());
+            userInfoBean.setUserName(user.getUserName());
+        }
+        return userInfoBean ;
     }
 }

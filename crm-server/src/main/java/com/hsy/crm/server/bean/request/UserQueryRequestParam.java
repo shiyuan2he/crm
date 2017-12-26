@@ -15,12 +15,22 @@ import javax.validation.constraints.Pattern;
  * Copyright (c) 2017 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-public class UserLoginRequestParam {
+public class UserQueryRequestParam {
 
+	@Pattern(regexp = "^[1-9]\\d*$",message = "id必须为纯数字")
+	private Long id ;
 	private String userName;
 	private String password;
 	@Pattern(regexp = "^((13[0-9])|(15[^4,\\\\D])|(18[0,5-9]))\\\\d{8}$",message = "必须满足手机号格式")
 	private Long mobile;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getUserName() {
 		return userName;
