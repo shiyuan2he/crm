@@ -17,8 +17,8 @@ public class UserControllerTest extends SpringbootJunitBase {
     MultiValueMap<String,Object> paramsMap = new LinkedMultiValueMap<>();
     @Test
     public void reg() throws Exception {
-        paramsMap.clear();
+        /*paramsMap.clear();
         paramsMap.add("mobile", "15910868535");
-        this.postRequest("/api/rest/crm/user/v1/reg",paramsMap);
+        this.postRequest("/api/rest/crm/user/v1/reg",paramsMap);*/
     }
 }

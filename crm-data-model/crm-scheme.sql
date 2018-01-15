@@ -93,4 +93,18 @@ create table t_crm_role_permission(
 ) ENGINE = InnoDB AUTO_INCREMENT=1 CHARSET utf8 COMMENT '角色权限表';
 
 
+alter table t_crm_user
+  add COLUMN age TINYINT(3) DEFAULT 0 comment '年龄' after email;
+alter table t_crm_user
+  add COLUMN real_name VARCHAR(10) DEFAULT null comment '真是姓名' after user_name;
+alter table t_crm_user
+  add COLUMN picture VARCHAR(50) DEFAULT null COMMENT '用户图像' after sex;
+
+alter table t_crm_user
+  drop COLUMN password_encryption_type;
+
+alter table t_crm_user modify COLUMN password VARCHAR(32) DEFAULT NULL comment '密码'
+
+
+
 

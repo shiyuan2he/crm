@@ -14,12 +14,16 @@ public class TCrmUser implements Serializable{
 	private String userCode;
 	@Column(name = "user_name",unique = true)
 	private String userName;
+	@Column(name = "real_name")
+	private String realName;
 	@Column
 	private String password;
-	@Column(name = "password_encryption_type")
-	private String passwordEncryptionType;
 	@Column
 	private Byte sex ;
+	@Column
+	private short age ;
+	@Column
+	private String picture ;
 	@Column
 	private Long mobile;
 	@Column
@@ -61,12 +65,6 @@ public class TCrmUser implements Serializable{
 	}
 	public String getPassword(){
 		return password;
-	}
-	public void setPasswordEncryptionType(String passwordEncryptionType){
-		this.passwordEncryptionType=passwordEncryptionType;
-	}
-	public String getPasswordEncryptionType(){
-		return passwordEncryptionType;
 	}
 	public void setMobile(Long mobile){
 		this.mobile=mobile;
@@ -136,5 +134,29 @@ public class TCrmUser implements Serializable{
     public void setIsDel(Byte isDel) {
         this.isDel = isDel;
     }
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+
+	public short getAge() {
+		return age;
+	}
+
+	public void setAge(short age) {
+		this.age = age;
+	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
 }
 

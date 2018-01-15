@@ -4,11 +4,13 @@ import com.hsy.crm.server.bean.entity.TCrmUser;
 import com.hsy.crm.server.bean.request.UserQueryRequestParam;
 import com.hsy.crm.server.bean.request.UserRegRequestParam;
 import com.hsy.crm.server.dao.TCrmUserRepository;
+import com.hsy.crm.server.enums.ConstantsEnum;
 import com.hsy.crm.server.service.IUserService;
 import com.hsy.java.bean.vo.UserInfoBean;
 import com.hsy.java.enums.ConstantEnum;
 import com.hsy.java.java.base.utils.RandomHelper;
 import com.hsy.java.util.secure.AESHelper;
+import com.hsy.java.util.secure.MD5Helper;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,16 +39,23 @@ public class UserServiceImpl implements IUserService{
 
         user.setUserCode(RandomHelper.generateStringByLength(8));
         user.setUserName(regParam.getUserName());
-        user.setPassword(AESHelper.encode(user.getPassword()));
-        user.setPasswordEncryptionType(ConstantEnum.ENCRYPTION_TYPE_AES.getCode());
+        user.setPassword(
+                MD5Helper.stringToMD5ByIdentified(
+                        ConstantsEnum.SECURE_TYPE_MD5_PREFIX.getCode(),
+                        regParam.getPassword())
+        );
         user.setEmail(regParam.getEmail());
         user.setMobile(regParam.getMobile());
         user.setSource(regParam.getSource());
         user.setSex(regParam.getSex());
+        user.setCreater(0L);
         user.setCreateTime(nowTime);
         user.setIsDel((byte) 0);
         user.setRemark(regParam.getRemark());
-        crmUserRepository.saveAndFlush(user) ;
+        user.setAge(regParam.getAge());
+        user.setPicture(regParam.getPicture());
+        user.setRealName(regParam.getRealName());
+        user = crmUserRepository.saveAndFlush(user) ;
         if(user.getId() > 0){
             return true ;
         }

@@ -40,10 +40,13 @@ public class UserController extends BaseController{
             @ApiImplicitParam(name = "userName",value = "用户名称",dataType = "String"),
             @ApiImplicitParam(name = "password",value = "登陆密码",dataType = "String"),
             @ApiImplicitParam(name = "sex",value = "性别,1:男 2:女",dataType = "Integer"),
-            @ApiImplicitParam(name = "mobile",value = "手机号",required = true,dataType = "Long"),
+            @ApiImplicitParam(name = "mobile",value = "手机号",dataType = "Long"),
             @ApiImplicitParam(name = "email",value = "邮箱",dataType = "String"),
             @ApiImplicitParam(name = "source",value = "用户来源",dataType = "String"),
-            @ApiImplicitParam(name = "remark",value = "备注",dataType = "String")
+            @ApiImplicitParam(name = "remark",value = "备注",dataType = "String"),
+            @ApiImplicitParam(name = "age",value = "年龄",dataType = "Short"),
+            @ApiImplicitParam(name = "picture",value = "图像",dataType = "String"),
+            @ApiImplicitParam(name = "realName",value = "真实姓名",dataType = "String")
     })
     @PostMapping(value = "/v1/reg")
     @ResponseBody

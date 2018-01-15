@@ -22,13 +22,16 @@ public class UserRegRequestParam {
 	private String password;
 	@Pattern(regexp = "[01]",message = "sex值只能是1：男或者2：女")
 	private Byte sex ;
-	@NotNull(message = "mobile must not be null")
+	//@NotNull(message = "mobile must not be null")
 	@Pattern(regexp = "^((13[0-9])|(15[^4,\\\\D])|(18[0,5-9]))\\\\d{8}$",message = "必须满足手机号格式")
 	private Long mobile;
 	@Email(message = "email must be email pattern")
 	private String email ;
 	private String source;
 	private String remark ;
+	private short age ;
+	private String picture ;
+	private String realName ;
 
 	public String getUserName() {
 		return userName;
@@ -84,5 +87,29 @@ public class UserRegRequestParam {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public short getAge() {
+		return age;
+	}
+
+	public void setAge(short age) {
+		this.age = age;
+	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
 	}
 }
