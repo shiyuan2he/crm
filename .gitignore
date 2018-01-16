@@ -3,3 +3,6 @@ crm.iml
 */*.iml
 target
 */target
+logs
+logs/*
+logs/*/*
