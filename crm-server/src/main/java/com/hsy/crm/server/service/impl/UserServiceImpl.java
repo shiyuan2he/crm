@@ -1,20 +1,19 @@
 package com.hsy.crm.server.service.impl;
 
 import com.hsy.crm.server.bean.entity.TCrmUser;
-import com.hsy.crm.server.bean.request.UserQueryRequestParam;
 import com.hsy.crm.server.bean.request.UserRegRequestParam;
 import com.hsy.crm.server.dao.TCrmUserRepository;
 import com.hsy.crm.server.enums.ConstantsEnum;
 import com.hsy.crm.server.service.IUserService;
 import com.hsy.java.bean.vo.UserInfoBean;
-import com.hsy.java.enums.ConstantEnum;
 import com.hsy.java.java.base.utils.RandomHelper;
-import com.hsy.java.util.secure.AESHelper;
 import com.hsy.java.util.secure.MD5Helper;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -37,7 +36,7 @@ public class UserServiceImpl implements IUserService{
         TCrmUser user = new TCrmUser() ;
         Date nowTime = Calendar.getInstance().getTime() ;
 
-        user.setUserCode(RandomHelper.generateStringByLength(8));
+        user.setUserCode(RandomHelper.generateValueByParam("","",8));
         user.setUserName(regParam.getUserName());
         user.setPassword(
                 MD5Helper.stringToMD5ByIdentified(
@@ -77,17 +76,22 @@ public class UserServiceImpl implements IUserService{
         }else if(StringUtils.isNotBlank(username)&&StringUtils.isNotBlank(password)){
             // 用户名密码登陆
             user = crmUserRepository.withUsernameAndPasswordQuery(
-                    password,
-                    AESHelper.encode(password),
+                    username,
+                    MD5Helper.stringToMD5ByIdentified(
+                            ConstantsEnum.SECURE_TYPE_MD5_PREFIX.getCode(),
+                            password),
                     (byte)0) ;
         }else{
             // 手机号短信验证码登陆
         }
         if (null != user) {
-            userInfoBean.setUserId(user.getId());
-            userInfoBean.setMobile(user.getMobile());
-            userInfoBean.setUserCode(user.getUserCode());
-            userInfoBean.setUserName(user.getUserName());
+            try {
+                BeanUtils.copyProperties(userInfoBean,user);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
         }
         return userInfoBean ;
     }

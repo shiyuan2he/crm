@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 /**
@@ -50,7 +51,10 @@ public class UserController extends BaseController{
     })
     @PostMapping(value = "/v1/reg")
     @ResponseBody
-    public ResponseBodyBean<Boolean> reg(@Valid UserRegRequestParam regParam, BindingResult result){
+    public ResponseBodyBean<Boolean> reg(@Valid UserRegRequestParam regParam, BindingResult result, HttpServletResponse response){
+
+        response.setHeader("Access-Control-Allow-Origin","*");
+        response.setHeader("Access-Control-Allow-Methods","POST");
         if(result.hasErrors()){
             return failure(ParamValidation.validateRequestParam(result)) ;
         }

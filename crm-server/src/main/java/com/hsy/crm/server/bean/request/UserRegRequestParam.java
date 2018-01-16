@@ -20,12 +20,12 @@ public class UserRegRequestParam {
 
 	private String userName;
 	private String password;
-	@Pattern(regexp = "[01]",message = "sex值只能是1：男或者2：女")
+	//@Pattern(regexp = "[01]",message = "sex值只能是1：男或者2：女")
 	private Byte sex ;
 	//@NotNull(message = "mobile must not be null")
-	@Pattern(regexp = "^((13[0-9])|(15[^4,\\\\D])|(18[0,5-9]))\\\\d{8}$",message = "必须满足手机号格式")
+	//@Pattern(regexp = "^((13[0-9])|(15[^4,\\\\D])|(18[0,5-9]))\\\\d{8}$",message = "必须满足手机号格式")
 	private Long mobile;
-	@Email(message = "email must be email pattern")
+	//@Email(message = "email must be email pattern")
 	private String email ;
 	private String source;
 	private String remark ;

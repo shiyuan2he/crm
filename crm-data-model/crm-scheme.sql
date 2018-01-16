@@ -103,7 +103,16 @@ alter table t_crm_user
 alter table t_crm_user
   drop COLUMN password_encryption_type;
 
-alter table t_crm_user modify COLUMN password VARCHAR(32) DEFAULT NULL comment '密码'
+alter table t_crm_user modify COLUMN password VARCHAR(32) DEFAULT NULL comment '密码';
+ALTER TABLE t_crm_permission ALTER COLUMN updater DROP DEFAULT;
+ALTER TABLE t_crm_permission DROP FOREIGN KEY t_crm_permission_ibfk_1;
+ALTER TABLE t_crm_role ALTER COLUMN updater DROP DEFAULT;
+ALTER TABLE t_crm_role DROP FOREIGN KEY t_crm_role_ibfk_1;
+ALTER TABLE t_crm_user_role DROP FOREIGN KEY t_crm_user_role_ibfk_1;
+ALTER TABLE t_crm_user_role ALTER COLUMN user_id DROP DEFAULT;
+ALTER TABLE t_crm_user_role DROP FOREIGN KEY t_crm_user_role_ibfk_2;
+ALTER TABLE t_crm_user_role ALTER COLUMN role_id DROP DEFAULT;
+ALTER TABLE t_crm_user MODIFY id BIGINT(19) NOT NULL AUTO_INCREMENT COMMENT '主键';
 
 
 

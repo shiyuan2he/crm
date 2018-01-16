@@ -21,4 +21,12 @@ public class UserControllerTest extends SpringbootJunitBase {
         paramsMap.add("mobile", "15910868535");
         this.postRequest("/api/rest/crm/user/v1/reg",paramsMap);*/
     }
+
+    @Test
+    public void query() throws Exception {
+        paramsMap.clear();
+        paramsMap.add("userName", "admin");
+        paramsMap.add("password", "B8C0C77FF03423AFD402485AA1781B8B");
+        this.getRequest("/api/rest/crm/user/v1/query",paramsMap);
+    }
 }
