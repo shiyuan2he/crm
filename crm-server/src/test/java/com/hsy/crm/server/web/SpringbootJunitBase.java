@@ -1,6 +1,6 @@
 package com.hsy.crm.server.web;
 
-import com.hsy.crm.server.CmsServerApplication;
+import com.hsy.crm.server.CrmServerApplication;
 import com.hsy.java.util.spring.SpringWebJunitBase;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -24,7 +24,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
  * @price ¥5    微信：hewei1109
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = CmsServerApplication.class)
+@SpringBootTest(classes = CrmServerApplication.class)
 @WebMvcTest
 public class SpringbootJunitBase extends SpringWebJunitBase{
     @Autowired
