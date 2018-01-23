@@ -20,8 +20,7 @@ import javax.validation.Valid;
 
 /**
  * @author heshiyuan
- * @description <p></p>
- * @path springboot.demo/com.hsy.springboot.demo.springboot.jdbc
+ * @description <p>用户模块，提供swagger2 restful接口文档</p>
  * @date 2017/12/22 11:28
  * @github http://github.com/shiyuan2he
  * @email shiyuan4work@sina.com
